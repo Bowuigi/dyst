@@ -30,6 +30,7 @@ The functions are pretty self explanatory
 `dyst` is the dynamic stack data structure
 
 |  return  |  name        |  arguments                                           |
+|---       |---           |---                                                   |
 |  dyst    |  dyst_new    |  (size_t length, size_t type_size);                  |
 |  void    |  dyst_delete |  (dyst *stack);                                      |
 |  int     |  dyst_resize |  (dyst *stack, size_t new_length);                   |
