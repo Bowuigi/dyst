@@ -77,7 +77,7 @@ int dyst_resize(dyst *stack, size_t new_length) {
 	if (new_length<stack->used)
 		return 1;
 
-	void *tmp=realloc(stack->stack,new_length*stack->type_size);
+	void *tmp=realloc(stack->stack, new_length * stack->type_size);
 
 	// Return if allocation fails
 	if (tmp==NULL)
