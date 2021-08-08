@@ -1,5 +1,5 @@
 CC=cc
-CFLAGS=-O0 -ggdb -std=c99 -Wall -Wpedantic
+CFLAGS=-Og -ggdb -std=c99 -Wall
 
 build:
 	${CC} ${CFLAGS} test.c -o test
