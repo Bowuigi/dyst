@@ -26,15 +26,15 @@
 
  -- Functions --
 
- +----------+--------------+------------------------------------------------------+
- |  return  |  name        |  arguments                                           |
- |----------|--------------|------------------------------------------------------|
- |  dyst    |  dyst_new    |  (size_t length, size_t type_size);                  |
- |  void    |  dyst_delete |  (dyst *stack);                                      |
- |  int     |  dyst_resize |  (dyst *stack, size_t new_length);                   |
- |  int     |  dyst_push   |  (dyst *stack, void *element, size_t element_size);  |
- |  void*   |  dyst_pop    |  (dyst *stack);                                      |
- +----------+--------------+------------------------------------------------------+
+ +----------+--------------+-----------------------------------------+
+ |  return  |  name        |  arguments                              |
+ |----------|--------------|-----------------------------------------|
+ |  dyst    |  dyst_new    |  (size_t length);                       |
+ |  void    |  dyst_delete |  (dyst *stack);                         |
+ |  int     |  dyst_resize |  (dyst *stack, size_t new_length);      |
+ |  int     |  dyst_push   |  (dyst *stack, void *element);          |
+ |  void*   |  dyst_pop    |  (dyst *stack);                         |
+ +----------+--------------+-----------------------------------------+
 
  -- Limitations --
  Like in most dynamic array implementations, a cast to (void*) is required to add data to the stack, another cast to use the data stored in the stack is also needed.
@@ -54,8 +54,8 @@ typedef struct dyst {
 	void **stack;
 } dyst;
 
-// Create a new dynamic stack with an allocated size equivalent to 'size'*'type_size', you must call 'dyst_free' after you finish using the stack
-dyst dyst_new(size_t length, size_t type_size) {
+// Create a new dynamic stack with an allocated size equivalent to 'size'*'sizeof(void*)', you must call 'dyst_free' after you finish using the stack
+dyst dyst_new(size_t length) {
 	static dyst tmp;
 	tmp.stack=calloc(length,sizeof(void*));
 	tmp.length=length;
@@ -88,7 +88,7 @@ int dyst_resize(dyst *stack, size_t new_length) {
 }
 
 // Add an element at the end of the dynamic stack
-int dyst_push(dyst *stack, void *element, size_t element_size) {
+int dyst_push(dyst *stack, void *element) {
 	if (stack->used+1 > stack->length) {
 		stack->length *= 2;
 		int r = dyst_resize(stack,stack->length);
